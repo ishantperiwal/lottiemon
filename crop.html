@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <title>Lottie Cropper & Expander</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.10.26/interact.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+<link rel="stylesheet" href="css/crop.css">
+</head>
+<body>
+   <div id="top-controls">
+
+     <div class="preview-buttons">
+         <button id="centerBtn" title="Center Crop Box on Lottie"><img src="cropAssets/center.svg" />Center</button>
+         <button id="ratioBtn" title="Set Aspect Ratio"><img src="cropAssets/ratio.svg" />W:H</button>
+
+        <button id="increasePaddingBtn"  title="Increase surrounding space by 20%"><img src="cropAssets/expand.svg" />Expand</button>
+
+
+
+      </div>
+
+      <div><button id="applyBtn" style="display:none;" disabled title="Apply changes and prepare download">Download</button> <a id="downloadLink" style="display:none;" title="Download the modified Lottie JSON">Download Modified JSON</a></div>
+   </div>
+
+   <div id="workspace">
+       <button id="resetZoomBtn">Reset Zoom</button>
+       <div id="pan-zoom-container">
+
+           <div id="previewWrapper">
+
+               <div id="lottieContainer"></div>
+               <div id="cropBox">
+                   <div class="handle top-left"></div>
+                   <div class="handle top-right"></div>
+                   <div class="handle bottom-left"></div>
+                   <div class="handle bottom-right"></div>
+               </div>
+           </div>
+       </div>
+   </div>
+
+
+    <div id="ratioOverlay">
+      <div class="ratio-form">
+        <h3>Set Aspect Ratio</h3>
+        <div class="ratio-input-group">
+          <input type="number" step="any" min="0.01" class="ratio-input" id="ratioW" placeholder="W">
+          <span>:</span>
+          <input type="number" step="any" min="0.01" class="ratio-input" id="ratioH" placeholder="H">
+        </div>
+        <div class="ratio-buttons">
+            <button class="ratio-submit" id="applyRatio">Apply Ratio</button>
+            <button class="ratio-cancel" id="closeRatio">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+
+ <script src="js/crop.js" defer></script>
+</body>
+</html>

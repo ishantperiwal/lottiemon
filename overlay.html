@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lottie Segment Marker Editor</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<link rel="stylesheet" href="css/overlay.css">
+</head>
+<body>
+  <div class="container">
+
+
+
+    <!-- Preview + main play -->
+    <div id="preview-wrapper">
+      <div id="animation-container"></div>
+      <div id="fullControl" class="segment-control" style="border-color:#888;">
+      <div class="segment-header">
+    <div class="segment-info">
+  <div style=" font-size: 14px;">Full Animation</div>
+      <div class="segment-frames" id="fullFramesCount">0 frames</div>
+    </div>
+      <div class="segment-handles">
+      <div id="globalBar"></div>
+      <input id="fullSeek" type="range" min="0" max="0" value="0" />
+      <div id="seekTooltip" class="seek-tooltip"></div>
+    </div>
+    <div class="segment-actions">
+      <div class="button-group">
+        <button id="mainPlay" class="play-btn" disabled>Play All</button>
+          <button id="downloadAll" class="download-btn" disabled></button>
+        </div>
+    </div>
+  </div>
+  </div>
+
+    </div>
+
+
+
+
+    <div class="controls">
+        <button id="addSegment" disabled> Add a Segment</button>
+      <div id="segmentsContainer"></div>
+      <div class="button-group">
+
+      </div>
+
+    </div>
+
+  </div>
+
+<script src="js/overlay.js" defer></script>
+</body>
+</html>
