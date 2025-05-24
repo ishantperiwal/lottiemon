@@ -420,7 +420,7 @@ animation: slideDownFadeIn 950ms cubic-bezier(0.1,0.1,0.1,1) forwards;
       align-items: center;
       gap: var(--spacing-sm);
       background-color: #f0f0f0; /* Keep light grey bg */
-      padding: var(--spacing-xs) var(--spacing-sm);
+      padding: var(--spacing-xs) 8px;
       border-radius: var(--border-radius-pill);
     }
     .color-input-group input[type="text"] {
