@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lottiemon</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/index.css">
+
+
+</head>
+<body>
+
+  <div id="allChipsOverlay" class="all-chips-overlay-backdrop" style="display: none;">
+      <div class="all-chips-overlay-panel">
+          <div class="all-chips-overlay-header">
+              <h3 style="margin: 0; font-size: 1.1em;">All Loaded Animations</h3>
+              <button id="closeAllChipsOverlayBtn" class="all-chips-overlay-close-btn" aria-label="Close All Chips Overlay">&times;</button>
+          </div>
+          <div id="allChipsListContainer" class="all-chips-overlay-list-container">
+              </div>
+      </div>
+  </div>
+
+<input type="file" id="additionalFileInput" accept=".json" style="display: none;" />
+  <input type="file" id="fileInput" accept=".json, .lottie" style="display: none;" />
+  <input type="file" id="multipleFileInput" accept=".json, .lottie" multiple style="display: none;" />
+  <div id="top-bar">
+   <div style="flex: 1; justify-content:center; margin:auto;"  >
+     <div style="width:85%; display: flex;  margin:auto; justify-content: flex-start;">
+     <img src="mainLogo.svg" alt="Main Logo" class="page-logo" /></div>
+   </div>
+
+   <div style="flex: 1.1; margin: auto; justify-content:center;">
+     <div style="max-width: 400px; display: flex;  margin:auto; justify-content: flex-end;">
+       <div id="headerLottie"></div>
+     </div>
+   </div>
+ </div>
+
+ <div id="uploadWrapper">
+   <div id="uploadButtonWrapper">
+     <label for="fileInput" id="uploadLabel" class="btn btn--primary">Choose Lottie JSON</label> </div>
+     <div>
+    <label for="multipleFileInput" id="uploadMultipleLabel" class="btn btn--secondary">Choose Multiple Lottie JSONs</label>
+</div>
+     <div class="drag-drop-overlay">
+        <div class="chat-bubble" id="randomTextContainer">Feed me a lottie!</div>
+       <div id="dragDropLottie"></div> </div>
+
+     <input type="file" id="fileInput" accept=".json, .lottie" />
+   </div>
+
+  <div class="window-container">
+    <div class="window-header">
+       <span id="dotLottieWindowTitle" class="window-title" contenteditable="true" style="display: none;">No file loaded</span>
+      <span class="window-title" contenteditable="true" id = "jsonWindowTitle">No file loaded</span>
+  <button class="window-close" aria-label="Close Preview">&times;</button>
+    </div>
+    <div id="lottieFileChipsContainer" style="padding: var(--spacing-sm) 0; border-bottom: 1px solid var(--color-border); display: none; background-color: #f9f9f9;">
+         <div id="lottieFileChips" style="display: flex;  gap: var(--spacing-sm);">
+             </div>
+     </div>
+
+    <div class="window-body checkerboard" style="flex-direction: column;">
+      <div class="preview-controls-top-left" style="position: absolute; top: 10px; left: 10px; z-index: 10;">
+        <button id="activateColorPickerBtn" class="control-button" title="Pick color from animation"
+          style="padding: 5px; background: #fff; border: 1px solid #ccc; border-radius: 10px; cursor: pointer;">
+          <img src="assets/target.svg" alt="Pick color" width="24" height="24">
+      </button>
+</div>
+      <div class="preview-bg-toggle" title="Toggle Background (Checkerboard/Solid)">
+       <span class="preview-bg-label">GIF BG</span>
+       <label class="switch"> <input type="checkbox" id="previewBgToggle">
+         <span class="slider"></span>
+         <span class="sr-only">Toggle Preview Background</span>
+       </label>
+     </div>
+
+    <div id="lottiePreview"></div>
+
+     <div class="lottie-player-controls">
+       <button id="playPauseBtn" class="control-button" aria-label="Pause">
+     <svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg> </button>
+      <input type="range" id="lottieSeekbar" value="0" min="0" step="1" aria-label="Animation progress">
+      <div class="speed-control-pill" id="speedControlPillBtn" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-controls="speedSliderPopup">
+        <img src="assets/speed.svg" alt="Speed Icon" width="18" height="18"> <span id="speedValuePill" style="width: 1.4rem;margin: auto;text-align: center;">1.0x</span>
+      </div>
+
+      <div class="speed-slider-popup" id="speedSliderPopup">
+
+        <label for="speedSliderMain" class="sr-only">Animation Speed</label>
+        <input
+          type="range"
+          id="speedSliderMain"
+          min="0.1"
+          max="3"
+          step="0.1"
+          value="1"
+          list="speedStopsMain"
+          aria-labelledby="speedValuePill"
+        >
+        <button class="dismiss-speed-popup" id="dismissSpeedPopupBtn" aria-label="Dismiss speed control" style="display: none;">
+          <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg> </button>
+        <datalist id="speedStopsMain">
+          <option value="0.5"></option><option value="1.0"></option><option value="1.5"></option>
+          <option value="2.0"></option><option value="2.5"></option><option value="3.0"></option>
+        </datalist>
+        </div>
+    </div>
+
+    <div id="animationDurationPill" class="info-pill" style="display: none;">0.00s</div>
+
+    </div>
+  </div>
+
+
+  <div id="mainContent">
+    <div id="editorArea">
+
+
+      <div id="filterInfoPill" style="display: none; align-items: center; gap: 6px; padding: 8px 12px; padding-left:16px; background-color: rgb(255 174 170); border-radius: 999px; margin: 30px auto 10px; width: fit-content; max-width: 90%;">
+   <span style="font-size: 0.9em;">Dismiss Color Search</span>
+   <span id="filterPillColorSwatch" style="display: none; width: 20px; height: 20px; border: 1px solid #777; border-radius: 4px; vertical-align: middle;"></span>
+   <span id="filterPillHexDisplay" style="font-size: 0.9em; font-family: monospace; display: none;">#XXXXXX</span>
+<button id="resetFilterBtn" title="Clear filter and show all colors" style="background: none; border: none; font-size: 1.2em; cursor: pointer; padding: 0 5px; padding-top:3px;">×</button>
+</div>
+
+
+
+      <h3 id="colorInstancesLabel" class="editor-heading"><span style="margin-left: 6px;">Color Instance Clusters</span></h3>
+      <div id="colorEditor">
+        </div>
+
+
+                <h3 id="gradientInstancesLabel" class="editor-heading" style="display: none;"><span style="margin-left: 6px;">Gradient Instances</span></h3>
+              <div id="stopEditor">
+                </div>
+
+                <h3 id="textEditorLabel" class="editor-heading" style="display: none;"><span style="margin-left: 6px;">Text Instances</span></h3>
+        <div id="textEditorContainer">
+
+        </div>
+
+
+        <h3 id="animatedColorLabel" class="editor-heading"><span style="margin-left: 6px;">Animated Color Instance Clusters</span></h3>
+<div id="animatedColorEditor"></div>
+
+        <h3 id="animatedGradientLabel" class="editor-heading"><span style="margin-left: 6px;">Animated Gradient Instances</span></h3>
+        <div id="animatedGradientEditor"></div>
+
+
+
+
+
+
+        <div id="emptyStateDiv">
+        <img src="nocolor.png" alt="No colors detected">
+    </div>
+    </div>
+<div id="midsection"></div>
+    <div id="previewArea">
+
+
+
+      <div class="section-card" id="jsonEditorCard">
+        <div class="json-header">
+          <h3 id="jsonExportLabel">Lottie JSON</h3>
+          <div class="json-header-controls">
+            <button id="openAssetReplacerBtn" class="btn btn--icon" title="Replace Embedded Image Assets" disabled aria-label="Open Asset Replacer">
+    </button>
+            <button id="openOverlayBtn" class="btn btn--icon" title="Add/Edit Segments" disabled aria-label="Open Trim Editor">
+            </button>
+            <button id="openCropBtn" class="btn btn--icon" title="Crop Animation" disabled aria-label="Open Crop Editor">
+            </button>
+            <button id="downloadJsonBtn" class="btn btn--icon btn--secondary" title="Download Modified JSON" style="display:none;" aria-label="Download Modified JSON">
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="section-card" id="dotLottieExportCard">
+              <div class="json-header">
+                <h3 id="dotLottieExportLabel">Dot Lottie</h3>
+                <div class="json-header-controls">
+                  <button id="downloadDotLottieBtn" class="btn btn--icon btn--secondary" title="Download Modified .Lottie" aria-label="Download Modified DotLottie">
+                  </button>
+                </div>
+              </div>
+            </div>
+      <div class="section-card" id="gifOptionsCard">
+        <div class="gif-settings-header">
+          <h3 id="gifExportLabel">GIF Export</h3>
+           <div class="gif-header-controls">
+             <button id="downloadGifBtn" class="btn btn--icon btn--accent" style="display:none;" title="Generate and Download GIF" aria-label="Generate and Download GIF">
+                <div class="loading-spinner"></div>
+             </button>
+          </div>
+        </div>
+
+        <div class="gif-settings">
+          <label for="transparentBg">Background</label>
+          <div style="display: flex; align-items: center; gap: var(--spacing-sm);">
+             <div class="color-input-group-bg" id="bgColorGroup">
+                <label for="bgColorPicker" class="sr-only">Background Color</label>
+                <input type="color" id="bgColorPicker" value="#000000">
+                <label for="bgHexInput" class="sr-only">Background Hex</label>
+                <input type="text" id="bgHexInput" value="#000000">
+            </div>
+            <label class="switch" title="Toggle Transparent Background">
+                <input type="checkbox" id="transparentBg" checked>
+                <span class="slider"></span>
+            </label>
+            <span class="sr-only">Transparent Background Toggle</span>
+          </div>
+        </div>
+
+        <div class="gif-settings">
+          <label for="gifScale">Resolution Scale</label>
+          <select id="gifScale">
+            <option value="0.25">0.25x</option>
+            <option value="0.5">0.5x</option>
+            <option value="1" selected>1x (Default)</option>
+            <option value="1.5">1.5x</option>
+            <option value="2">2x</option>
+             <option value="4" id="gifScale4x" hidden>4x</option> <option value="8" id="gifScale8x" hidden>8x</option>
+          </select>
+        </div>
+      </div>
+
+    </div> </div> <div id="gifContainer"></div>
+
+
+
+
+
+  <div class="overlay" id="renderSettingsOverlay">
+
+    <div class="overlay-content">
+        <button class="overlay-close" aria-label="Close GIF Settings">&times;</button>
+      <h3>Advanced GIF Settings</h3>
+
+      <div class="setting-row">
+        <label for="keyColor">Transparency Key Color (for GIF):</label>
+        <div class="controls">
+            <input type="color" id="keyColor" value="#000000">
+            <input type="text" id="keyHex" value="#000000">
+        </div>
+        <small>Color to treat as transparent (use near-black if Lottie uses pure black).</small>
+      </div>
+
+      <div class="setting-row">
+        <label for="replaceColor">Replacement Color:</label>
+         <div class="controls">
+            <input type="color" id="replaceColor" value="#010101">
+            <input type="text" id="replaceHex" value="#010101">
+        </div>
+         <small>Color to replace the Key Color with before rendering.</small>
+      </div>
+
+      <button onclick="closeSettings()" class="btn btn--primary" style="margin-top: var(--spacing-md);">Save Settings</button>
+    </div>
+  </div>
+
+  <div class="overlay" id="customOverlay">
+      <button class="overlay-close" aria-label="Close Editor Overlay"><img src="css/close.svg">
+ <span style="margin-bottom: 1px;">Cancel</span> </button>
+ <button id="saveAndCloseBtn" class="overlay-close" aria-label="Save and Close Crop Editor">
+       <img src="assets/save.svg"> <span style="margin-bottom: 1px;">Save & Close</span>
+   </button>
+    <div class="overlay-content">
+
+      <iframe id="customContent" title="Lottie Animation Editor Overlay"></iframe>
+    </div>
+  </div>
+
+  <div id="coffeeRoastOverlay" class="coffeeRoast-hidden">
+
+    <iframe id="freshBrewFrame" src="" frameborder="0"></iframe>
+</div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<script type="module" src="js/index.js" defer></script>
+
+
+
+</body>
+</html>
