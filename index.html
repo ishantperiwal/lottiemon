@@ -32,7 +32,7 @@
   <div id="top-bar">
    <div style="flex: 1; justify-content:center; margin:auto;"  >
      <div style="width:85%; display: flex;  margin:auto; justify-content: flex-start;">
-     <img src="mainLogo.svg" alt="Main Logo" class="page-logo" /></div>
+     <img src="mainLogo.svg" alt="Main Logo" class="page-logo" id="mainPageLogo" style="cursor: pointer;" /></div>
    </div>
 
    <div style="flex: 1.1; margin: auto; justify-content:center;">
@@ -67,11 +67,15 @@
      </div>
 
     <div class="window-body checkerboard" style="flex-direction: column;">
-      <div class="preview-controls-top-left" style="position: absolute; top: 10px; left: 10px; z-index: 10;">
+      <div class="preview-controls-top-left" style="position: absolute; top: 10px; left: 10px; z-index: 10; display:flex; flex-direction:row;">
         <button id="activateColorPickerBtn" class="control-button" title="Pick color from animation"
           style="padding: 5px; background: #fff; border: 1px solid #ccc; border-radius: 10px; cursor: pointer;">
           <img src="assets/target.svg" alt="Pick color" width="24" height="24">
       </button>
+      <button id="openFlutterPreviewBtn" class="control-button" title="Preview in Flutter"
+   style="padding: 5px; background: #fff; border: 1px solid #ccc; border-radius: 10px; cursor: pointer; margin-left: 10px;">
+   <img src="assets/flutter.png" alt="Flutter Icon" width="24" height="24">
+ </button>
 </div>
       <div class="preview-bg-toggle" title="Toggle Background (Checkerboard/Solid)">
        <span class="preview-bg-label">GIF BG</span>

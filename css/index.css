@@ -2050,3 +2050,12 @@ max-width: 1200px;
 }
 /* Optional: Style for the container if it needs more than inline styles */
 /* #lottieFileChipsContainer { ... } */
+
+#lottiePreview.dragover-preview {
+    /* Remove the border property if it exists here */
+    /* border: 2px dashed #4CAF50; */
+
+    outline: 2px dashed #4CAF50; /* Use outline instead of border */
+    outline-offset: -2px; /* Pull the outline slightly inside if desired, or set to 0 for directly on the edge */
+
+}
